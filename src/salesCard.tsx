@@ -1,19 +1,19 @@
 import Header from "./components/Header"
 import SalesCard from "./components/SalesCard"
+import './styles.css'
 
-function App() {
+function SalesCard(): JSX.Element{
   return (  
     <>  
       <Header />
       <main>
-        <section id="sales">
-          <div className="devsmeta-container">
-            <SalesCard />
+        <section id="sales-card">
+          <div className="devsmeta-container">                    
           </div>
         </section>
       </main>   
-      </> 
+    </> 
   )
 }
 
-export default App
+export default SalesCard
