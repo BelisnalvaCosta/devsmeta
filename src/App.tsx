@@ -1,5 +1,4 @@
 import Header from "./components/Header"
-import SalesCard from "./components/SalesCard"
 import './styles.css'
 
 function SalesCard(): JSX.Element{
