@@ -1,6 +1,5 @@
-import logo from '../../assets/img/logo.svg'
-import './styles.css'
-import SalesCard from "./components/SalesCard"
+import logo from '../../assets/img/logo.svg';
+import './styles.css';
 
 function Header() {
   return (    
@@ -9,7 +8,8 @@ function Header() {
         <img src={logo} alt="DEVSMeta" />
           <h1>DEVSMeta</h1>
           <p>
-            <SalesCard />
+            Desenvolvindo por
+            <a href="http://github.com/BelisnalvaCosta/">@devsuperior</a>
           </p>
         </div>
       </header>
@@ -17,4 +17,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Header;

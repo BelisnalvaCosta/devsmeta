@@ -1,13 +1,15 @@
-import Header from "./components/Header"
-import './styles.css'
+import Header from "./components/Header";
+import SalesCard from "./components/SalesCard";
+import Components from './styles.css';
 
-function SalesCard(): JSX.Element{
+function App(){
   return (  
     <>  
       <Header />
       <main>
-        <section id="sales-card">
-          <div className="devsmeta-container">                    
+        <section id="sales">
+          <div className="devsmeta-container">
+            <SalesCard />                    
           </div>
         </section>
       </main>   
@@ -15,4 +17,4 @@ function SalesCard(): JSX.Element{
   )
 }
 
-export default SalesCard
+export default App;

@@ -1,15 +1,37 @@
-import NotificationButton from '../NotificationButton'
-import './style.css'
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import NotificationButton from '../notificationButton';
+import './style.css';
+
 function SalesCard() {
+
+    //Criando metodos para exibir a data do ano anterior
+    const min = new Date(new Date().setDate(new Date().getDate() - 365));
+    const max = new Date();
+
+    const [minDate, setMinDate] = useState(min);
+    const [maxDate, setMaxDate] = useState(max);
+
     return (
         <div className="devsmeta-card">
             <h2 className="devsmeta-sales-title">Vendas</h2>
             <div>
                 <div className="devsmeta-form-control-container">
-                    <input className="devsmeta-form-control" type="text" />
+                    <DatePicker
+                        selected={minDate}
+                        onChange={(date: Date) => setMinDate(date)}
+                        className="devsmeta-form-control"
+                        dateFormat="dd/MM/yyyy"
+                    />
                 </div>
                 <div className="devsmeta-form-control-container">
-                    <input className="devsmeta-form-control" type="text" />
+                <DatePicker
+                        selected={maxDate}
+                        onChange={(date: Date) => setMaxDate(date)}
+                        className="devsmeta-form-control"
+                        dateFormat="dd/MM/yyyy"
+                    />                    
                 </div>
             </div>
 
@@ -76,4 +98,4 @@ function SalesCard() {
   )
 }
 
-export default SalesCard
+export default SalesCard;

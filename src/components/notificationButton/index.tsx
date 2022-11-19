@@ -1,20 +1,13 @@
-import logo from '../../assets1/img/logo.svg'
-import './styles.css'
+import icon from '../../assets/img/notification-icon.svg';
+import './styles.css';
 
-function Header() {
-    return (
-        <header>
-        <div className="devsmeta-logo-container">
-            <img src={logo} alt="DEVSMeta" />
-            <h1>DSMeta</h1>
-            <p>
-              Desenvolvido por
-              <a href="git@github.com:BelisnalvaCosta/meta.git">@devsuperior.ig</a>
-            </p>
+function NotificationButton() {
+    return (        
+        <div className="devsmeta-red-btn">
+            <img src={icon} alt="Notificar" />            
         </div>
-    </header> 
-        
+            
     )
 }
 
-export default Header
+export default NotificationButton;
