@@ -5,6 +5,7 @@ import { Sales } from "../../models/sale";
 import "react-datepicker/dist/react-datepicker.css";
 import NotificationButton from '../notificationButton';
 import Component from './style.css';
+import axios from "axios";
 
 function SalesCard() {
 
@@ -21,13 +22,12 @@ function SalesCard() {
 
         const dmin = minDate.toISOString().slice(0, 10);
         const dmax = maxDate.toISOString().slice(0, 10);
-        console.log(min);
-
+        
         axios.get('${BASE URL}/sales?minDate=${dmin}&maxdate=${max}')
             .then((response: { data: { content: SetStateAction<Sales[]>; }; }) => {
                 setSales(response.data.content);
             });
-    }, [minDate, maxDate]);
+    });
 
     return (
         <div className="devsmeta-card">
@@ -67,16 +67,16 @@ function SalesCard() {
                     <tbody>
                         {sales.map(sale => {
                             return (
-                                <tr key= {sales.id}>
+                                <tr key= {sale.id}>
                                     <td className="show992">{sale.id}</td>
                                     <td className="show576">{new Date(sale.date).toLocaleDateString()}</td>
                                     <td>{sale.sellerName}</td>
                                     <td className="show992">{sale.visited}</td>
-                                    <td className="show992">{sale.details}</td>
+                                    <td className="show992">{sale.deals}</td>
                                     <td>R$ {sale.amount.toFixed(2)}</td>
                                     <td>
                                         <div className="devsmeta-red-btn-container">
-                                            <NotificationButton />
+                                            <NotificationButton saleId={sale.id} />
                                         </div>
                                     </td>
                                 </tr>
