@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
+import { BASE_URL } from "../../utils/request";
 import DatePicker from "react-datepicker";
+import { Sales } from "../../models/sale";
 import "react-datepicker/dist/react-datepicker.css";
 import NotificationButton from '../notificationButton';
-import './style.css';
+import Component from './style.css';
 
 function SalesCard() {
 
@@ -12,6 +14,20 @@ function SalesCard() {
 
     const [minDate, setMinDate] = useState(min);
     const [maxDate, setMaxDate] = useState(max);
+
+    const [sales, setSales] = useState<Sales[]>([]);
+
+    useState(() => {
+
+        const dmin = minDate.toISOString().slice(0, 10);
+        const dmax = maxDate.toISOString().slice(0, 10);
+        console.log(min);
+
+        axios.get('${BASE URL}/sales?minDate=${dmin}&maxdate=${max}')
+            .then((response: { data: { content: SetStateAction<Sales[]>; }; }) => {
+                setSales(response.data.content);
+            });
+    }, [minDate, maxDate]);
 
     return (
         <div className="devsmeta-card">
@@ -26,12 +42,12 @@ function SalesCard() {
                     />
                 </div>
                 <div className="devsmeta-form-control-container">
-                <DatePicker
+                    <DatePicker
                         selected={maxDate}
                         onChange={(date: Date) => setMaxDate(date)}
                         className="devsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
-                    />                    
+                    />
                 </div>
             </div>
 
@@ -49,53 +65,32 @@ function SalesCard() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="show992">#341</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$ 55300.00</td>
-                            <td>
-                                <div className="devsmeta-red-btn-container">     
-                                        <NotificationButton />             
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="show992">#341</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$ 55300.00</td>
-                            <td>
-                                <div className="devsmeta-red-btn-container">
-                                    <NotificationButton />            
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="show992">#341</td>
-                            <td className="show576">08/07/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$ 55300.00</td>
-                            <td>
-                                <div className="devsmeta-red-btn-container">
-                                    <NotificationButton />                
-                                </div>
-                            </td>
-                        </tr>
+                        {sales.map(sale => {
+                            return (
+                                <tr key= {sales.id}>
+                                    <td className="show992">{sale.id}</td>
+                                    <td className="show576">{new Date(sale.date).toLocaleDateString()}</td>
+                                    <td>{sale.sellerName}</td>
+                                    <td className="show992">{sale.visited}</td>
+                                    <td className="show992">{sale.details}</td>
+                                    <td>R$ {sale.amount.toFixed(2)}</td>
+                                    <td>
+                                        <div className="devsmeta-red-btn-container">
+                                            <NotificationButton />
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                        }
                     </tbody>
 
                 </table>
             </div>
 
-        </div>    
-          
-  )
+        </div>
+
+    )
 }
 
 export default SalesCard;

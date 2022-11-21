@@ -9,7 +9,7 @@ function Header() {
           <h1>DEVSMeta</h1>
           <p>
             Desenvolvindo por
-            <a href="http://github.com/BelisnalvaCosta/">@devsuperior</a>
+            <a href="git@github.com:BelisnalvaCosta/devsmeta.git/">@devsuperior</a>
           </p>
         </div>
       </header>
